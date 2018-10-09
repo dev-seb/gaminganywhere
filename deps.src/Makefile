@@ -5,7 +5,7 @@ USE_SYSTEM_PACKAGES ?= 0
 PARALLEL_MAKE	?= -j5
 SYSTEM		= $(shell uname -s)
 PACKAGES	= sdl2 sdl2_ttf yasm lame opus ogg vorbis theora vpx \
-		  x264 x265 xvid ffmpeg live555
+		  x264 x265 xvid ffmpeg live555 websocketpp
 OSX_CLANG_PATCH	= echo '*** Not on OS X: not applied ***'
 
 ### package configurations for Mac
@@ -179,3 +179,8 @@ live555:
 	cp -f $(LIVE555DIR)/groupsock/include/NetCommon.h $(GADEPS)/include/live555
 	rm -rf $(LIVE555DIR)
 
+websocketpp:
+	$(TGZUNPACK) $(WEBSOCKETPP)
+	cd $(WEBSOCKETPPDIR); cmake -D CMAKE_INSTALL_PREFIX=$(GADEPS) .
+	make -C $(WEBSOCKETPPDIR) install
+	rm -rf $(WEBSOCKETPPDIR)
