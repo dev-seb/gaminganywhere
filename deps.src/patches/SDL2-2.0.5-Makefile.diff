@@ -1,0 +1,11 @@
+--- Makefile	2018-10-10 14:28:05.033597471 +0200
++++ Makefile.new	2018-10-10 14:56:43.472538410 +0200
+@@ -23,7 +23,7 @@
+ CFLAGS  = -g -O3 -DUSING_GENERATED_CONFIG_H
+ EXTRA_CFLAGS = -Iinclude -I/home/seb/Projects/Streaming/Sources/gaming/gaminganywhere/deps.src/SDL2-2.0.5/include  -mmmx -m3dnow -msse -msse2 -Wall -fvisibility=hidden -Wdeclaration-after-statement -Werror=declaration-after-statement  -D_REENTRANT   -pthread -I/usr/include/mirclient -I/usr/include/mircookie -I/usr/include/mircore -I/usr/include/libdrm -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -D_REENTRANT -DHAVE_LINUX_VERSION_H
+ LDFLAGS = 
+-EXTRA_LDFLAGS =  -Wl,--no-undefined -lm -ldl -lsndio -lpthread -lrt
++EXTRA_LDFLAGS =  -Wl,--no-undefined -lm -ldl -lsndio -lpthread -lrt -lmirclient
+ LIBTOOL = $(SHELL) $(top_builddir)/libtool
+ INSTALL = /usr/bin/install -c
+ AR	= ar

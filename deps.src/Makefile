@@ -55,6 +55,7 @@ sdl2:
 	$(TGZUNPACK) $(SDL2)
 	mkdir -p $(SDL2DIR)/mybuild
 	cd $(SDL2DIR)/mybuild; ../configure --prefix=$(GADEPS) --with-pic
+	cd $(SDL2DIR)/mybuild; patch < ../../patches/$(SDL2DIR)-Makefile.diff
 	make -C $(SDL2DIR)/mybuild $(PARALLEL_MAKE)
 	make -C $(SDL2DIR)/mybuild install
 	rm -rf $(SDL2DIR)
