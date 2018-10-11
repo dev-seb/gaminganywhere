@@ -46,7 +46,7 @@ static void *audio_encoder_param = NULL;
 static struct gaRect *prect = NULL;
 static struct gaRect rect;
 
-static ga_module_t *m_vsource, *m_filter, *m_vencoder, *m_asource, *m_aencoder, *m_ctrl, *m_server;
+static ga_module_t *m_vsource, *m_filter, *m_vencoder, *m_asource, *m_aencoder, *m_ctrl, *m_ctrl_ws, *m_server;
 
 int
 load_modules() {
@@ -68,6 +68,8 @@ load_modules() {
 	}
 	if((m_ctrl = ga_load_module("mod/ctrl-sdl", "sdlmsg_replay_")) == NULL)
 		return -1;
+	if((m_ctrl_ws = ga_load_module("mod/ctrl-ws", "ctrl_ws_")) == NULL)
+		return -1;
 	if((m_server = ga_load_module("mod/server-live555", "live_")) == NULL)
 		return -1;
 	return 0;
@@ -79,6 +81,7 @@ init_modules() {
 	//static const char *filterpipe[] = { imagepipe0, filterpipe0 };
 	if(conf->ctrlenable) {
 		ga_init_single_module_or_quit("controller", m_ctrl, (void *) prect);
+		ga_init_single_module_or_quit("ctrl-ws", m_ctrl_ws, (void *) prect);
 	}
 	// controller server is built-in - no need to init
 	// note the order of the two modules ...
@@ -108,7 +111,8 @@ run_modules() {
 	if(conf->ctrlenable) {
 		ga_run_single_module_or_quit("control server", ctrl_server_thread, conf);
 		// XXX: safe to comment out?
-		//ga_run_single_module_or_quit("control replayer", m_ctrl->threadproc, conf);
+		//ga_run_single_module_or_quit("control replayer", , conf);
+		m_ctrl_ws->start(conf);
 	}
 	// video
 	//ga_run_single_module_or_quit("image source", m_vsource->threadproc, (void*) imagepipefmt);
