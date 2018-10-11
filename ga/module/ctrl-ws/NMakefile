@@ -1,8 +1,8 @@
 
 !include <..\NMakefile.common>
 
-OBJS	= ctrl-websocket.obj
-TARGET	= ctrl-websocket.$(EXT)
+OBJS	= ctrl-ws.obj
+TARGET	= ctrl-ws.$(EXT)
 
 !include <..\NMakefile.build>
 

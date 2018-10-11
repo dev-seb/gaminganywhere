@@ -14,42 +14,25 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <stdio.h>
+#ifndef __CTRL_WEBSOCKET_H__
+#define __CTRL_WEBSOCKET_H__
 
 #include "ga-common.h"
-#include "ga-conf.h"
-#include "controller.h"
-#include "ctrl-websocket.h"
-
+#include "ga-module.h"
 #include "rtspconf.h"
 
+#define	WS_EVENT_MSGTYPE_NULL			0
+#define	WS_EVENT_MSGTYPE_KEYBOARD		1
+#define	WS_EVENT_MSGTYPE_MOUSEKEY		2
+#define WS_EVENT_MSGTYPE_MOUSEMOTION	3
+#define WS_EVENT_MSGTYPE_MOUSEWHEEL		4
 
-int
-wsmsg_replay_init(void *arg) {
+int ctrl_ws_init(void *arg);
+int ctrl_ws_deinit(void *arg);
 
-	// TODO: 
+int ctrl_ws_start(void *arg);
+int ctrl_ws_stop(void *arg);
 
-	return 0;
-}
+// TODO
 
-int
-wsmsg_replay_deinit(void *arg) {
-
-	// TODO;
-
-	return 0;
-}
-
-#ifdef GA_MODULE
-ga_module_t *
-module_load() {
-	static ga_module_t m;
-	bzero(&m, sizeof(m));
-	m.type = GA_MODULE_TYPE_CONTROL;
-	m.name = strdup("control-websocket");
-	m.init = wsmsg_replay_init;
-	m.deinit = wsmsg_replay_deinit;
-	return &m;
-}
-#endif
-
+#endif /* __CTRL_WEBSOCKET_H__ */
