@@ -1,0 +1,11 @@
+--- platform.inc	2018-10-10 17:33:32.055066601 +0200
++++ platform.inc.new	2018-10-10 17:33:57.115445885 +0200
+@@ -58,7 +58,7 @@
+ # ============================================================================
+ 
+ INSTALL=/usr/bin/install -c
+-LN_S=ln -s
++LN_S=ln -sf
+ DESTDIR=
+ prefix=/home/seb/myprog/gaminganywhere/deps.posix
+ exec_prefix=${prefix}

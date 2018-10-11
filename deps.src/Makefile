@@ -140,6 +140,7 @@ x265:
 xvid:
 	$(TBZUNPACK) $(XVID)
 	cd $(XVIDDIR)/build/generic; ./configure --prefix=$(GADEPS)
+	cd $(XVIDDIR)/build/generic; patch < ../../../patches/$(XVIDDIR)-platform.inc.diff
 	make -C $(XVIDDIR)/build/generic $(PARALLEL_MAKE)
 	make -C $(XVIDDIR)/build/generic install
 	rm -rf $(XVIDDIR)
