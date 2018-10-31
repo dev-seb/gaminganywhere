@@ -25,3 +25,8 @@
 
 /ga/client/ga-client
 /ga/server/periodic/ga-server-periodic
+
+/deps.src/SDL2-2.0.5
+/ga/client-web/server/node_modules
+/ga/client-web/server/package.json
+.idea/

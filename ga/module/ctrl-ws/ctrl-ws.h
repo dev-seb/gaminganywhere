@@ -14,18 +14,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CTRL_WEBSOCKET_H__
-#define __CTRL_WEBSOCKET_H__
+#ifndef __CTRL_WS_H__
+#define __CTRL_WS_H__
 
 #include "ga-common.h"
 #include "ga-module.h"
 #include "rtspconf.h"
-
-#define	WS_EVENT_MSGTYPE_NULL			0
-#define	WS_EVENT_MSGTYPE_KEYBOARD		1
-#define	WS_EVENT_MSGTYPE_MOUSEKEY		2
-#define WS_EVENT_MSGTYPE_MOUSEMOTION	3
-#define WS_EVENT_MSGTYPE_MOUSEWHEEL		4
 
 int ctrl_ws_init(void *arg);
 int ctrl_ws_deinit(void *arg);
@@ -33,6 +27,4 @@ int ctrl_ws_deinit(void *arg);
 int ctrl_ws_start(void *arg);
 int ctrl_ws_stop(void *arg);
 
-// TODO
-
-#endif /* __CTRL_WEBSOCKET_H__ */
+#endif /* __CTRL_WS_H__ */

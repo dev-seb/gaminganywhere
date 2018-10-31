@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WebSocket Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmpeg/0.1/jsmpg.js"></script>
+    <script src="./sdl-js/sdl-scancode.js"></script>
+    <script src="./sdl-js/sdl-keycode.js"></script>
+    <script src="./sdl-js/sdl-mouse.js"></script>
+    <script src="./ga-client.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            margin: 20px;
+            /*width: 1280px;*/
+            width: 1707px;
+            height: 720px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        function load() {
+            // Create canvas
+            var canvas = document.getElementById("world");
+            // Create websocket for control
+            var ws_control = new WebSocket("ws://localhost:9002", 'tcp');
+            // init SDL
+            GAClient.init(ws_control, canvas);
+            // Create websocket for video
+            var ws_video = new WebSocket('ws://localhost:9004','udp');
+            // Init JSMPEG
+            player = new jsmpeg(ws_video, {
+                canvas: canvas // Canvas should be a canvas DOM element
+            });
+        }
+    </script>
+</head>
+<body onload="load()">
+<canvas id="world" width="1707" height="720"></canvas>
+</body>
+</html>

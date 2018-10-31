@@ -365,6 +365,11 @@ ctrl_server_setreplay(msgfunc callback) {
 	return old;
 }
 
+msgfunc
+ctrl_server_getreplay() {
+    return replay;
+}
+
 void*
 ctrl_server_thread(void *rtspconf) {
 	struct RTSPConf *conf = (struct RTSPConf*) rtspconf;

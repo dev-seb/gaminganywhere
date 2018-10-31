@@ -717,6 +717,60 @@ sdlmsg_replay(sdlmsg_t *msg) {
 	if(sdlmsg_key_blocked(msg)) {
 		return 0;
 	}
+	// Reverse engineering !
+    if(msg->msgtype == SDL_EVENT_MSGTYPE_KEYBOARD) {
+        sdlmsg_keyboard_t *msgk = (sdlmsg_keyboard_t*) msg;
+        ga_error("\n%d: msgk {"
+            "msgsize: %d,"
+            "msgtype: %d,"
+            "which: %d,"
+            "is_pressed: %d,"
+            "unused0: %d,"
+            "scancode: %d,"
+            "sdlkey: %d,"
+            "unicode: %d,"
+            "sdlmod: %d"
+            "}\n",
+            msgk->sdlkey,
+            msgk->msgsize,
+            msgk->msgtype,
+            msgk->which,
+            msgk->is_pressed,
+            msgk->unused0,
+            msgk->scancode,
+            msgk->sdlkey,
+            msgk->unicode,
+            msgk->sdlmod
+        );
+    }
+    else if(msg->msgtype == SDL_EVENT_MSGTYPE_MOUSEMOTION) {
+        sdlmsg_mouse_t *msgm = (sdlmsg_mouse_t*) msg;
+        ga_error("\nmsgm {"
+            "msgsize: %d,"
+            "msgtype: %d,"
+            "which: %d,"
+            "is_pressed: %d,"
+            "mousebutton: %d,"
+            "mousestate: %d,"
+            "relativeMouseMode: %d,"
+            "mousex: %d,"
+            "mousey: %d,"
+            "mouseRelX: %d,"
+            "mouseRelY: %d"
+            "}\n",
+            msgm->msgsize,
+            msgm->msgtype,
+            msgm->which,
+            msgm->is_pressed,
+            msgm->mousebutton,
+            msgm->mousestate,
+            msgm->relativeMouseMode,
+            msgm->mousex,
+            msgm->mousey,
+            msgm->mouseRelX,
+            msgm->mouseRelY
+        );
+    }
 	sdlmsg_replay_native(msg);
 	return 0;
 }
@@ -724,6 +778,7 @@ sdlmsg_replay(sdlmsg_t *msg) {
 void
 sdlmsg_replay_callback(void *msg, int msglen) {
 	sdlmsg_t *m = (sdlmsg_t*) msg;
+	ga_error("sdlmsg_replay_callback: msgtype: %d", m->msgtype);
 	if(msglen != ntohs(m->msgsize)/*sizeof(sdlmsg_t)*/) {
 		ga_error("message length mismatched. (%d != %d)\n",
 			msglen, ntohs(m->msgsize));

@@ -54,6 +54,7 @@ EXPORT	void	ctrl_client_sendmsg(void *msg, int msglen);
 
 EXPORT	int	ctrl_server_init(struct RTSPConf *conf, const char *ctrlid);
 EXPORT	msgfunc ctrl_server_setreplay(msgfunc);
+EXPORT	msgfunc ctrl_server_getreplay();
 EXPORT	void*	ctrl_server_thread(void *rtspconf);
 EXPORT	int	crtl_server_readnext(void *msg, int msglen);
 
